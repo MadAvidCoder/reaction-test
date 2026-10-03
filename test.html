@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="light-container">
+      <div class="spacer-side"></div>
+      <div class="start-light" id="light-1"></div>
+      <div class="spacer"></div>
+      <div class="start-light" id="light-2"></div>
+      <div class="spacer"></div>
+      <div class="start-light" id="light-3"></div>
+      <div class="spacer"></div>
+      <div class="start-light" id="light-4"></div>
+      <div class="spacer"></div>
+      <div class="start-light" id="light-5"></div>
+      <div class="spacer-side"></div>
+    </div>
+    <h1 id="reaction-text">...</h1>
+  </body>
+
+  <script>
+    let light1 = document.getElementById("light-1");
+    let light2 = document.getElementById("light-2");
+    let light3 = document.getElementById("light-3");
+    let light4 = document.getElementById("light-4");
+    let light5 = document.getElementById("light-5");
+
+    let text = document.getElementById("reaction-text")
+
+    let x = true;
+    let time = Date.now();
+
+    function a() {
+      setTimeout(() => {
+        time = Date.now()
+        if (x) {
+          light1.classList = "start-light off";
+          light2.classList = "start-light off";
+          light3.classList = "start-light off";
+          light4.classList = "start-light off";
+          light5.classList = "start-light off";
+          x = false;
+        } else {
+          x = true;
+          light1.classList = "start-light";
+          light2.classList = "start-light";
+          light3.classList = "start-light";
+          light4.classList = "start-light";
+          light5.classList = "start-light";
+        }
+        a()
+      }, 1000);
+    }
+    document.addEventListener("keydown", () => {
+        text.textContent = (Date.now() - time) / 1000 + "s";
+    });
+
+    a();
+  </script>
+</html>

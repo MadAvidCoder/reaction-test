@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="light-container">
+      <div class="spacer-side"></div>
+      <div class="start-light" id="light-1"></div>
+      <div class="spacer"></div>
+      <div class="start-light" id="light-2"></div>
+      <div class="spacer"></div>
+      <div class="start-light" id="light-3"></div>
+      <div class="spacer"></div>
+      <div class="start-light" id="light-4"></div>
+      <div class="spacer"></div>
+      <div class="start-light" id="light-5"></div>
+      <div class="spacer-side"></div>
+    </div>
+    <h1 id="reaction-text">Reaction Time: ...</h1>
+    <h2 id="best-text"></h2>
+  </body>
+
+  <script>
+    let light1 = document.getElementById("light-1");
+    let light2 = document.getElementById("light-2");
+    let light3 = document.getElementById("light-3");
+    let light4 = document.getElementById("light-4");
+    let light5 = document.getElementById("light-5");
+
+    let text = document.getElementById("reaction-text");
+    let besttext = document.getElementById("best-text")
+
+    function resetLights() {
+      light1.className = "start-light off";
+      light2.className = "start-light off";
+      light3.className = "start-light off";
+      light4.className = "start-light off";
+      light5.className = "start-light off";
+    }
+    resetLights();
+
+    let running = false;
+    let ready = false;
+
+    let start = Date.now();
+
+    let x1;
+    let x2;
+    let x3;
+    let x4;
+    let x5;
+
+    let best = localStorage.getItem("reaction_time_best");
+    if (best !== null) {
+        best = parseFloat(best)
+        besttext.textContent = "Best: " + best.toFixed(3) + "s"
+    }
+
+    document.addEventListener("keydown", (event) => {
+      const key = event.key.toLowerCase();
+      console.log(key);
+      if (key === " " || key === "enter") {
+        if (running & !ready) {
+          light1.className = "start-light";
+          light2.className = "start-light";
+          light3.className = "start-light";
+          light4.className = "start-light";
+          light5.className = "start-light";
+          text.textContent = "JUMP START";
+          running = false;
+          ready = false;
+          clearTimeout(x1)
+          clearTimeout(x2)
+          clearTimeout(x3)
+          clearTimeout(x4)
+          clearTimeout(x5)
+        } else if (running & ready) {
+            reaction_time = (Date.now() - start) / 1000;
+            text.textContent = "Reaction Time: " + reaction_time.toFixed(3) + "s";
+            if (best === null) {
+                best = reaction_time;
+            } else if (reaction_time < best) {
+                best = reaction_time;
+            }
+            localStorage.setItem("reaction_time_best", best)
+            besttext.textContent = "Best: " + best.toFixed(3) + "s"
+            ready = false;
+            running = false;
+        } else {
+          text.textContent = "Reaction Time: " + "..."
+          light1.className = "start-light";
+          light2.className = "start-light off";
+          light3.className = "start-light off";
+          light4.className = "start-light off";
+          light5.className = "start-light off";
+          running = true;
+          ready = false;
+          x1 = setTimeout(() => {
+            light2.className = "start-light";
+            x2 = setTimeout(() => {
+              light3.className = "start-light";
+              x3= setTimeout(() => {
+                light4.className = "start-light";
+                x4 = setTimeout(() => {
+                  light5.className = "start-light";
+                    x5 = setTimeout(() => {
+                    light1.className = "start-light off";
+                    light2.className = "start-light off";
+                    light3.className = "start-light off";
+                    light4.className = "start-light off";
+                    light5.className = "start-light off";
+                    start = Date.now();
+                    ready = true;
+                  }, (Date.now() % 5000) + 2000);
+                }, 1000);
+              }, 1000);
+            }, 1000);
+          }, 1000);
+        }
+      }
+    });
+  </script>
+</html>
