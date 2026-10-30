@@ -18,4 +18,4 @@ So, not wanting to admit defeat, I came up with a mildly cooked way of creating 
 
 And then while I was at it, because scope creep is real, I also added a personal best score, which stores in the browsers local storage.
 
-Overall this certainly wasn't the most unique project, nor was it particularly well coded... But it was a bit of fun, and I was pleased that I got it working without using any AI, Google, or Documentation, because I had no internet on the plane
+Overall this certainly wasn't the most unique project, nor was it particularly well coded... But it was a bit of fun, and I was pleased that I got it working without using any AI, Google, or Documentation, because I had no internet on the plane. It was in many ways a really great experience to remember how I once coded (before I started taking the easy route of turning to Google or AI with bugs and errors), by just testing things and trying things that I half remembered until they somehow worked well enough. For example, I kinda forgot how to make circles and how to align things to begin with, and I just messed around with the CSS until it worked, which was a very refreshing reminder.
